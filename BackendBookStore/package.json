@@ -1,0 +1,50 @@
+{
+  "name": "bookstore-api",
+  "version": "1.0.0",
+  "description": "E-commerce BookStore REST API (Express 5, MongoDB, Stripe)",
+  "main": "index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node seed/seed.js",
+    "seed:destroy": "node seed/seed.js --destroy",
+    "indexes": "node scripts/syncIndexes.js",
+    "test": "node scripts/smokeTest.js",
+    "migrate": "node scripts/migrate.js",
+    "mail:test": "node scripts/testMail.js"
+  },
+  "keywords": [
+    "bookstore",
+    "ecommerce",
+    "express",
+    "mongodb",
+    "stripe",
+    "rest-api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.4.1",
+    "morgan": "^1.12.0",
+    "multer": "^2.1.1",
+    "nodemailer": "^10.0.10",
+    "stripe": "^22.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

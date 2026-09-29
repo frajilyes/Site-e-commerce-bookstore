@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+
+# Secrets
+.env
+.env.*
+
+# Runtime artefacts
+uploads/*
+!uploads/.gitkeep
+logs/
+*.log
+npm-debug.log*
+coverage/
+.DS_Store
+ 
