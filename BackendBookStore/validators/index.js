@@ -135,9 +135,7 @@ const createBookRules = [
     .withMessage("Description must be between 10 and 5000 characters"),
   body("price").isFloat({ min: 0 }).withMessage("Price must be a positive number").toFloat(),
   body("oldPrice").optional().isFloat({ min: 0 }).toFloat(),
-  body("image")
-    .custom((value, { req }) => Boolean(value) || Boolean(req.file))
-    .withMessage("A cover image URL or an uploaded image file is required"),
+  body("image").trim().notEmpty().withMessage("A cover image URL is required"),
   body("category").trim().notEmpty().withMessage("Category is required"),
   body("stock").optional().isInt({ min: 0 }).withMessage("Stock cannot be negative").toInt(),
   body("badge").optional().isIn(BADGES).withMessage("Unsupported badge"),

@@ -1,4 +1,3 @@
-const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -22,7 +21,6 @@ const cartRouter = require("./Routers/cartRouter");
 const wishListRouter = require("./Routers/wishListRouter");
 const payementRouter = require("./Routers/payementRouter");
 const webHookRouter = require("./Routers/webHookRouter");
-const uploadRouter = require("./Routers/uploadRouter");
 
 const app = express();
 
@@ -91,22 +89,6 @@ if (!env.isTest) {
   app.use(morgan(env.isProduction ? "combined" : "dev"));
 }
 
-app.use(
-  `/${env.UPLOAD_DIR}`,
-  express.static(path.join(__dirname, env.UPLOAD_DIR), {
-    maxAge: "7d",
-    immutable: true,
-    etag: true,
-    index: false,
-    dotfiles: "deny",
-    setHeaders(res) {
-      res.setHeader("X-Content-Type-Options", "nosniff");
-      res.setHeader("Content-Security-Policy", "default-src 'none'; sandbox");
-    },
-  }),
-);
-
-
 const STATES = ["disconnected", "connected", "connecting", "disconnecting"];
 
 app.get("/health", (req, res) => {
@@ -135,7 +117,6 @@ app.get("/api", (req, res) => {
       wishlists: "/api/wishlists",
       orders: "/api/orders",
       payments: "/api/payments",
-      uploads: "/api/upload",
       webhooks: "/api/webhook",
       health: "/health",
     },
@@ -152,7 +133,6 @@ app.use("/api/carts", cartRouter);
 app.use("/api/wishlists", wishListRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/payments", payementRouter);
-app.use("/api/upload", uploadRouter);
 app.use("/api/webhook", webHookRouter);
 
 

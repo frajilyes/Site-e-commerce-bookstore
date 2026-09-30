@@ -5,7 +5,6 @@ const validate = require("../middlewares/validate");
 const { optionalAuth } = require("../middlewares/auth");
 const { adminOnly } = require("../middlewares/adminMiddleware");
 const { writeLimiter } = require("../middlewares/rateLimiter");
-const upload = require("../middlewares/upload");
 const rules = require("../validators");
 
 const bookRouter = Router();
@@ -28,9 +27,9 @@ bookRouter.get("/:id", optionalAuth, controller.getBookById);
 
 bookRouter.use(...adminOnly, writeLimiter);
 
-bookRouter.post("/", upload.single("image"), upload.verifyImages, validate(rules.createBookRules), controller.createBook);
-bookRouter.put("/:id", upload.single("image"), upload.verifyImages, validate(rules.updateBookRules), controller.updateBook);
-bookRouter.patch("/:id", upload.single("image"), upload.verifyImages, validate(rules.updateBookRules), controller.updateBook);
+bookRouter.post("/", validate(rules.createBookRules), controller.createBook);
+bookRouter.put("/:id", validate(rules.updateBookRules), controller.updateBook);
+bookRouter.patch("/:id", validate(rules.updateBookRules), controller.updateBook);
 bookRouter.patch("/:id/stock", validate(rules.updateStockRules), controller.updateStock);
 bookRouter.delete("/:id", validate(rules.idParam), controller.deleteBookById);
 

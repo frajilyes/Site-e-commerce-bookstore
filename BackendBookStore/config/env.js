@@ -73,8 +73,6 @@ const env = {
   AUTH_IP_RATE_LIMIT_MAX: toInt(process.env.AUTH_IP_RATE_LIMIT_MAX, 100),
   MAX_PENDING_ORDERS: toInt(process.env.MAX_PENDING_ORDERS, 5),
 
-  MAX_UPLOAD_SIZE: toInt(process.env.MAX_UPLOAD_SIZE, 5 * 1024 * 1024),
-  UPLOAD_DIR: process.env.UPLOAD_DIR || "uploads",
 
   DEFAULT_PAGE_SIZE: toInt(process.env.DEFAULT_PAGE_SIZE, 12),
   MAX_PAGE_SIZE: toInt(process.env.MAX_PAGE_SIZE, 100),

@@ -1,0 +1,158 @@
+.welcome-alert {
+  position: fixed;
+  top: 5.00rem;
+  right: 1.25rem;
+  z-index: 1000;
+  max-width: 22rem;
+  pointer-events: none;
+}
+
+.welcome-alert-card {
+  position: relative;
+  display: flex;
+  gap: 0.85rem;
+  padding: 1rem 2.25rem 1rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: linear-gradient(145deg, #0f2233 0%, #101a2b 100%);
+  box-shadow:
+    0 18px 40px rgba(2, 8, 23, 0.55),
+    0 0 0 1px rgba(6, 182, 212, 0.08) inset;
+  pointer-events: auto;
+  animation: welcomeAlertIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.welcome-alert-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.65rem;
+  color: #22d3ee;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+}
+
+.welcome-alert-body {
+  min-width: 0;
+}
+
+.welcome-alert-title {
+  margin: 0 0 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.welcome-alert-text {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #94a3b8;
+}
+
+.welcome-alert-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding: 0.45rem 0.85rem;
+  border: none;
+  border-radius: 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #062231;
+  background: linear-gradient(135deg, #38bdf8, #06b6d4);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.welcome-alert-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(6, 182, 212, 0.35);
+}
+
+.welcome-alert-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: #94a3b8;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.welcome-alert-close:hover {
+  color: #e2e8f0;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.welcome-alert-close:focus-visible,
+.welcome-alert-action:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+@keyframes welcomeAlertIn {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-alert {
+    top: calc(88px + 0.6rem);
+    bottom: auto;
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+  }
+
+  .welcome-alert-card {
+    align-items: center;
+    padding: 0.6rem 2.25rem 0.6rem 0.75rem;
+  }
+
+  .welcome-alert-text {
+    display: none;
+  }
+
+  .welcome-alert-title {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .welcome-alert-action {
+    margin-top: 0.45rem;
+    padding: 0.35rem 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-alert-card {
+    animation: none;
+  }
+
+  .welcome-alert-action {
+    transition: none;
+  }
+}

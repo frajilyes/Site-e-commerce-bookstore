@@ -1,4 +1,3 @@
-const path = require("path");
 const mongoose = require("mongoose");
 const Book = require("../Models/book");
 const Review = require("../Models/review");
@@ -20,9 +19,6 @@ const FILTERABLE = [
   "tags",
   "isActive",
 ];
-
-const publicUrl = (file) =>
-  `/${path.basename(file.destination)}/${file.filename}`;
 
 const findBookByIdOrSlug = (identifier) =>
   mongoose.isValidObjectId(identifier)
@@ -120,7 +116,6 @@ const getRelatedBooks = asyncHandler(async (req, res) => {
 
 const createBook = asyncHandler(async (req, res) => {
   const payload = { ...req.body };
-  if (req.file) payload.image = publicUrl(req.file);
 
   const book = await Book.create(payload);
   sendSuccess(res, 201, book);
@@ -131,8 +126,6 @@ const updateBook = asyncHandler(async (req, res) => {
   delete payload.slug;
   delete payload.rating;
   delete payload.numReviews;
-
-  if (req.file) payload.image = publicUrl(req.file);
 
   const book = await Book.findByIdAndUpdate(req.params.id, payload, {
     returnDocument: "after",

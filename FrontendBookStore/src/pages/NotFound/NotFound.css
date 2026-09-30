@@ -1,0 +1,97 @@
+.notfound-container,
+.notfound-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.notfound-container {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1512820790803-83ca734da794")
+    no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8),
+    rgba(40, 40, 70, 0.8)
+  );
+}
+
+.content {
+  position: relative;
+  max-width: 600px;
+  padding: 40px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.error-code {
+  font-size: 120px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #59b2e9, #7c1c54);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content h2 {
+  margin: 20px 0 10px;
+  font-size: 26px;
+}
+
+.content p {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: linear-gradient(135deg, #ac71e2, #cb4892);
+  color: white;
+  transition: 0.3s;
+}
+
+.buttons .secondary {
+  background: rgb(#a570d7, #cb4892);
+}
+
+.buttons button:hover {
+  box-shadow: 0 0 20px rgb(150, 21, 107);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

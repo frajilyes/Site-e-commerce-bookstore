@@ -7,8 +7,6 @@ build/
 .env.*
 
 # Runtime artefacts
-uploads/*
-!uploads/.gitkeep
 logs/
 *.log
 npm-debug.log*

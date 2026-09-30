@@ -1,0 +1,328 @@
+.search-container,
+.search-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.search-container {
+  min-height: 100vh;
+  background: url("https://images.unsplash.com/photo-1512820790803-83ca734da794")
+    no-repeat center center/cover;
+  position: relative;
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(3, 3, 3, 0.85),
+    rgba(41, 41, 84, 0.85)
+  );
+}
+
+.search-content {
+  position: relative;
+  max-width: 1600px;
+  margin: auto;
+}
+
+.search-content h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.search-input {
+  width: 70%;
+  max-width: 600px;
+  padding: 15px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(76, 150, 234, 0.3);
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 20px;
+  background: rgba(15, 23, 42, 0.7);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.search-input:hover {
+  border-color: rgba(56, 189, 248, 0.6);
+}
+
+.search-input:focus {
+  border-color: rgba(56, 189, 248, 1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+.search-input::placeholder {
+  color: #a8b3c7;
+}
+
+.search-count {
+  font-size: 14px;
+  color: #cbd5e1;
+  margin-bottom: 30px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.book-card {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.6),
+    rgba(30, 41, 59, 0.6)
+  );
+  border: 1px solid rgba(100, 200, 255, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.book-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.05),
+    rgba(99, 102, 241, 0.05)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.book-card:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+  transform: translateY(-16px) scale(1.02);
+  box-shadow:
+    0 25px 60px rgba(6, 182, 212, 0.2),
+    0 0 40px rgba(6, 182, 212, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.8),
+    rgba(30, 41, 59, 0.8)
+  );
+}
+
+.book-card:hover::after {
+  opacity: 1;
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  filter: brightness(1) blur(0px);
+}
+
+.book-card:hover .card-image img {
+  filter: brightness(1.1);
+  transform: scale(1.15) rotate(5deg);
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #00d4ff;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-header h3 {
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: left;
+  font-weight: 700;
+}
+
+.like-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+
+.like-btn:hover,
+.like-btn.liked {
+  background: #f43f5e;
+  border-color: #f43f5e;
+  transform: scale(1.4) rotate(-25deg);
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.5);
+}
+
+.like-btn.liked .heart-icon {
+  filter: drop-shadow(0 0 8px rgba(248, 113, 113, 0.8));
+  animation: pulse-heart 0.45s ease;
+}
+
+.heart-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes pulse-heart {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.book-card:hover .like-btn {
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.3);
+}
+
+.author {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: left;
+  font-weight: 500;
+}
+
+.category {
+  font-size: 11px;
+  color: #64748b;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  color: #5b728a;
+  cursor: pointer;
+  font-size: 13px;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.star:hover,
+.star:focus-visible {
+  color: #fbbf24;
+  transform: translateY(-2px) scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.85));
+}
+
+.star.filled {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.95));
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 16px;
+  color: #06b6d4;
+}
+
+.cart-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+}
+
+.cart-btn:hover {
+  background: linear-gradient(135deg, #0891b2, #0284c7);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.35);
+}
+
+.cart-btn.in-cart {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+.cart-btn.in-cart:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
+}
+
+.no-results {
+  font-size: 18px;
+  margin-top: 20px;
+  grid-column: 1 / -1;
+}

@@ -27,7 +27,7 @@ The seeded admin is `admin@bookstore.local` / `Admin12345`
 (override with `ADMIN_EMAIL` / `ADMIN_PASSWORD`).
 
 > The React front end owns port 3000 (the origin registered with Google for
-> social login) and proxies `/api`, `/uploads` and `/health` to
+> social login) and proxies `/api` and `/health` to
 > this API through the CRA dev proxy (`proxy` field in
 > `FrontendBookStore/package.json`). Keep the two ports distinct: the browser
 > only ever talks to `http://localhost:3000`.
@@ -273,12 +273,6 @@ Local testing:
 stripe listen --forward-to localhost:5000/api/webhook/stripe
 ```
 
-### Uploads — `/api/upload` (admin)
-
-`POST /` (field `file`), `POST /many` (field `files`, max 10), `GET /`,
-`DELETE /:filename`. Images only (jpeg, png, webp, avif, gif), 5 MB each.
-Files are served from `/uploads/<filename>`.
-
 ### Health
 
 `GET /health` — process uptime and database state.
@@ -298,7 +292,7 @@ Controllers/          request handlers (userAuth = open a session,
 Routers/              route definitions, auth guards and validation per route
 Services/             pricing, stock reservation, email verification, OAuth policy
 middlewares/          auth (who), adminMiddleware (may they), validation,
-                      sanitising, rate limiting, uploads, errors
+                      sanitising, rate limiting, errors
 validators/           express-validator rule sets
 utils/                ApiError, asyncHandler, query builder, responses,
                       jwt + generateToken (sessions), mailer (SMTP),
@@ -314,7 +308,7 @@ seed/                 demo catalogue and seeder
 - role-based guards, and ownership checks on orders, payments and reviews
 - Helmet, an allow-list CORS policy, and rate limits (global, per-write, and a tight one on credentials keyed by IP + email)
 - NoSQL-injection sanitising of body, params and query, plus parameter-pollution collapsing
-- request body limited to 1 MB, uploads to 5 MB with the file type checked and the client filename discarded
+- request body limited to 1 MB
 - Stripe webhooks verified by signature; card numbers are never received or stored
 
 ## Performance

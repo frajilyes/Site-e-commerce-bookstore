@@ -620,17 +620,6 @@ const run = async () => {
     });
   });
 
-  await check("a file disguised as an image is refused and deleted", async () => {
-    const form = new FormData();
-    form.append("file", new Blob(["<script>alert(1)</script>"], { type: "image/png" }), "x.png");
-    const response = await fetch(`${origin}/api/upload`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${adminToken}` },
-      body: form,
-    });
-    assert.strictEqual(response.status, 400);
-  });
-
   await check("two simultaneous cancellations release the stock only once", async () => {
     const before = (await Book.findById(bookId).lean()).stock;
     const created = await request("POST", "/api/orders", {

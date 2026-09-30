@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="object-src 'none'; base-uri 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#020617" />
+    <meta name="color-scheme" content="dark light" />
+
+    <title>BookStore - Read &amp; Discover</title>
+    <meta
+      name="description"
+      content="BookStore - buy novels, bestsellers, manga and programming books online with wishlist, ratings and secure checkout."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="/" />
+
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BookStore - Read &amp; Discover" />
+    <meta property="og:title" content="BookStore - Read &amp; Discover" />
+    <meta
+      property="og:description"
+      content="Thousands of books, novels and bestsellers with a modern shopping experience."
+    />
+    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BookStore - Read &amp; Discover" />
+    <meta
+      name="twitter:description"
+      content="Thousands of books, novels and bestsellers with a modern shopping experience."
+    />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <style>
+      html,
+      body {
+        background-color: #020617;
+      }
+
+      #hero-backdrop {
+        position: fixed;
+        top: 88px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .off-home #hero-backdrop {
+        display: none;
+      }
+      #hero-backdrop img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      #app-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+      }
+      #root {
+        position: relative;
+        z-index: 2;
+      }
+      .shell-nav {
+        height: 88px;
+      }
+    </style>
+
+    <script>
+      (function () {
+        var path = location.pathname;
+        var home = path === "/" || path === "/index.html";
+
+        if (!home) document.documentElement.classList.add("off-home");
+
+        var srcset = function (name, widths) {
+          return widths
+            .map(function (w) {
+              return "/media/" + name + "-" + w + ".avif " + w + "w";
+            })
+            .join(", ");
+        };
+
+        if (!home) return;
+
+        var visual = {
+          name: "hero",
+          widths: [640, 768, 960, 1280, 1536],
+          fallback: 960,
+        };
+
+        var link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "image";
+        link.type = "image/avif";
+        link.fetchPriority = "high";
+        link.imageSizes = "100vw";
+        link.imageSrcset = srcset(visual.name, visual.widths);
+        link.href = "/media/" + visual.name + "-" + visual.fallback + ".avif";
+        document.head.appendChild(link);
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <h1>BookStore - Read &amp; Discover</h1>
+      <p>
+        Buy novels, bestsellers, manga and programming books online. This shop
+        needs JavaScript enabled to run.
+      </p>
+    </noscript>
+
+    <div id="hero-backdrop">
+      <picture>
+        <source
+          type="image/avif"
+          data-srcset="
+            /media/hero-640.avif   640w,
+            /media/hero-768.avif   768w,
+            /media/hero-960.avif   960w,
+            /media/hero-1280.avif 1280w,
+            /media/hero-1536.avif 1536w
+          "
+          sizes="100vw"
+        />
+        <img
+          data-src="/media/hero-1280.webp"
+          data-srcset="
+            /media/hero-640.webp   640w,
+            /media/hero-768.webp   768w,
+            /media/hero-960.webp   960w,
+            /media/hero-1280.webp 1280w,
+            /media/hero-1536.webp 1536w
+          "
+          sizes="100vw"
+          alt="Bookshelves filled with novels and bestsellers in a warm-lit bookstore"
+          width="1536"
+          height="1024"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+    </div>
+
+    <script>
+      (function () {
+        if (document.documentElement.classList.contains("off-home")) return;
+
+        var backdrop = document.getElementById("hero-backdrop");
+        var source = backdrop.querySelector("source");
+        var image = backdrop.querySelector("img");
+        source.srcset = source.dataset.srcset;
+        image.srcset = image.dataset.srcset;
+        image.src = image.dataset.src;
+      })();
+    </script>
+
+    <div id="app-shell" aria-hidden="true">
+      <div class="App">
+        <div
+          class="navbar shell-nav bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-500 shadow-2xl"
+        ></div>
+
+        <main style="flex: 1; display: flex; flex-direction: column">
+          <div class="relative min-h-screen overflow-hidden">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div
+              class="absolute top-0 left-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"
+            ></div>
+            <div
+              class="absolute bottom-0 right-0 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl"
+            ></div>
+
+            <div
+              class="relative z-10 flex flex-col justify-center items-start min-h-screen px-10 md:px-24 text-white"
+            >
+              <h1
+                class="text-5xl md:text-7xl font-extrabold leading-tight max-w-4xl"
+              >
+                Discover Your
+                <span class="text-cyan-300/80 font-semibold"
+                  >Next Favorite</span
+                >
+                Book
+              </h1>
+
+              <p class="mt-6 text-lg md:text-2xl text-gray-200 max-w-2xl">
+                Explore thousands of books, novels, mangas and bestsellers with
+                a premium modern shopping experience.
+              </p>
+
+              <div class="flex gap-6 mt-10">
+                <a
+                  href="/books"
+                  class="px-8 py-4 bg-cyan-500 text-white rounded-xl text-lg font-bold hover:scale-105 transition duration-300 shadow-2xl"
+                  >Shop Now</a
+                >
+                <a
+                  href="/about"
+                  class="px-8 py-4 border border-white rounded-xl text-lg font-bold hover:bg-white hover:text-black transition duration-300"
+                  >Explore</a
+                >
+              </div>
+            </div>
+
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+              <div class="absolute top-20 left-20 text-7xl opacity-20">📖</div>
+              <div class="absolute bottom-32 right-20 text-8xl opacity-20">
+                📘
+              </div>
+            </div>
+
+            <div
+              class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center text-white px-6"
+            >
+              <h2 class="text-6xl font-bold mb-6">Welcome To BookStore</h2>
+              <p class="text-xl text-gray-300 max-w-2xl">
+                Discover thousands of books, novels and best sellers with a
+                modern shopping experience.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var shell = document.getElementById("app-shell");
+
+        if (document.documentElement.classList.contains("off-home")) {
+          shell.remove();
+          return;
+        }
+
+        if (!document.querySelector('link[rel="stylesheet"]')) shell.remove();
+      })();
+    </script>
+
+    <div id="root"></div>
+  </body>
+</html>

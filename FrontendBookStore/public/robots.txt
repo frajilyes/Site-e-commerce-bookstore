@@ -1,0 +1,20 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Tunnel d'achat et espace compte : privés, et sans intérêt dans un index.
+Disallow: /checkout
+Disallow: /order-success
+Disallow: /review
+Disallow: /signin
+Disallow: /signup
+Disallow: /verify-email
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /api
+
+# Contenu dépendant du visiteur : vide pour un robot.
+Disallow: /search
+Disallow: /wishlist
+
+Sitemap: http://localhost:3000/sitemap.xml
